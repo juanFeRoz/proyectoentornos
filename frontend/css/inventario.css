@@ -23,7 +23,6 @@ tr:nth-child(even) {
 }
 .red-bg {
     background-color: white;
-    color: white;
 }
 .iconos {
     display: flex;
