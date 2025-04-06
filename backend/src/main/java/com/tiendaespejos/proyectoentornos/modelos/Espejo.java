@@ -1,9 +1,6 @@
 package com.tiendaespejos.proyectoentornos.modelos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity // Le dice a Hibernate que cree una tabla a partir de esta clase
 public class Espejo {
@@ -16,6 +13,48 @@ public class Espejo {
     private int precio;
 
     private int cantidad;
+
+    private int alto;
+
+    private int ancho;
+
+    @ManyToOne
+    private Proveedor proveedor;
+
+    public int getAlto() {
+        return alto;
+    }
+
+    public void setAlto(int alto) {
+        this.alto = alto;
+    }
+
+    public int getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
+    }
+
+    public int getPrecioProveedor() {
+        return precioProveedor;
+    }
+
+    public void setPrecioProveedor(int precioProveedor) {
+        this.precioProveedor = precioProveedor;
+    }
+
+    private int precioProveedor;
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
 
     public Integer getId() {
         return id;

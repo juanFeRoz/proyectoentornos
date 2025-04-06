@@ -1,6 +1,5 @@
 package com.tiendaespejos.proyectoentornos.controladores;
 
-
 import com.tiendaespejos.proyectoentornos.modelos.Espejo;
 import com.tiendaespejos.proyectoentornos.modelos.Proveedor;
 import com.tiendaespejos.proyectoentornos.repositorios.EspejoRepositorio;
@@ -16,30 +15,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(path = "/tiendaespejos")
-public class EspejoControlador {
-    @Autowired
-    private EspejoRepositorio espejoRepositorio;
-
+public class ProveedorControlador {
     @Autowired
     private ProveedorRepositorio proveedorRepositorio;
 
-    @PostMapping(path = "/agregar")
-    public @ResponseBody String agregarNuevoEspejo (@RequestParam String nombre, @RequestParam int cantidad, @RequestParam int precio, @RequestParam int alto, @RequestParam int ancho, @RequestParam int idProveedor, @RequestParam int precioProveedor) {
-        Espejo e = new Espejo();
-        e.setNombre(nombre);
-        e.setCantidad(cantidad);
-        e.setPrecio(precio);
-        e.setProveedor(proveedorRepositorio.findById(idProveedor).get());
-        e.setAlto(alto);
-        e.setAncho(ancho);
-        e.setPrecioProveedor(precioProveedor);
-        espejoRepositorio.save(e);
+    @PostMapping(path = "/agregarproveedor")
+    private @ResponseBody String agregarNuevoProveedor(@RequestParam String nombre, @RequestParam String direccion, @RequestParam String telefono) {
+        Proveedor p = new Proveedor();
+        p.setTelefono(telefono);
+        p.setDireccion(direccion);
+        p.setNombre(nombre);
+
+        proveedorRepositorio.save(p);
 
         return "Guardado";
     }
 
-    @GetMapping(path = "/todos")
-    public @ResponseBody Iterable<Espejo> obtenerTodosLosEspejos() {
-        return espejoRepositorio.findAll();
+    @GetMapping(path = "/todosproveedores")
+    private @ResponseBody Iterable<Proveedor> obtenerTodosLosProveedores() {
+        return proveedorRepositorio.findAll();
+    }
+
+    @GetMapping(path = "/obtenerproveedor")
+    private @ResponseBody Proveedor obtenerProveedorPorId(@RequestParam int id) {
+        return proveedorRepositorio.findById(id).get();
     }
 }
