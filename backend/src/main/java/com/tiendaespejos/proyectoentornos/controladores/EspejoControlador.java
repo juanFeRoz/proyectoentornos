@@ -4,7 +4,7 @@ package com.tiendaespejos.proyectoentornos.controladores;
 import com.tiendaespejos.proyectoentornos.modelos.Espejo;
 import com.tiendaespejos.proyectoentornos.modelos.Proveedor;
 import com.tiendaespejos.proyectoentornos.repositorios.EspejoRepositorio;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import com.tiendaespejos.proyectoentornos.repositorios.ProveedorRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(path = "/tiendaespejos")
+@CrossOrigin(origins = "*")
 public class EspejoControlador {
     @Autowired
     private EspejoRepositorio espejoRepositorio;
@@ -79,6 +80,10 @@ public class EspejoControlador {
         } else {
             return "Espejo no encontrado";
         }
+    }
+    @GetMapping(path = "/todosespejos2", produces = "application/json")
+    public @ResponseBody Iterable<Espejo> obtenerTodosLosEspejos2() {
+        return espejoRepositorio.findAll();
     }
 
 }
