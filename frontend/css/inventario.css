@@ -33,11 +33,21 @@ tr:nth-child(even) {
 }
 
 .iconos img {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     background-color: #fff;
     padding: 4px;
     border-radius: 50%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.iconos img:nth-child(1){
+    margin-left:-90px;
+}
+
+.iconos img:nth-child(7){
+    margin-left: 200px;
+}
+
+
+  
