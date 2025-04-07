@@ -23,7 +23,6 @@ tr:nth-child(even) {
 }
 .red-bg {
     background-color: white;
-    color: white;
 }
 .iconos {
     display: flex;
@@ -34,11 +33,36 @@ tr:nth-child(even) {
 }
 
 .iconos img {
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     object-fit: contain;
     background-color: #fff;
-    padding: 10px;
+    padding: 4px;
     border-radius: 50%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.acciones {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .acciones button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .acciones button:hover {
+    background-color: #0056b3;
+  }
+  
+
+
+  
