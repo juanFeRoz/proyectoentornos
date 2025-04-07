@@ -20,7 +20,14 @@ public class EspejoControlador {
     private ProveedorRepositorio proveedorRepositorio;
 
     @PostMapping(path = "/agregarespejo")
-    public @ResponseBody String agregarNuevoEspejo (@RequestParam String nombre, @RequestParam int cantidad, @RequestParam int precio, @RequestParam int alto, @RequestParam int ancho, @RequestParam int idProveedor, @RequestParam int precioProveedor) {
+    public @ResponseBody String agregarNuevoEspejo(
+            @RequestParam String nombre,
+            @RequestParam int cantidad,
+            @RequestParam int precio,
+            @RequestParam int alto,
+            @RequestParam int ancho,
+            @RequestParam int idProveedor,
+            @RequestParam int precioProveedor) {
         Espejo e = new Espejo();
         e.setNombre(nombre);
         e.setCantidad(cantidad);
@@ -33,7 +40,7 @@ public class EspejoControlador {
 
         return "Guardado";
     }
-    
+
 
     @GetMapping(path = "/todosespejos")
     public @ResponseBody Iterable<Espejo> obtenerTodosLosEspejos() {
