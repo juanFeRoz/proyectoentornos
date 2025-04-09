@@ -35,17 +35,19 @@ export const EspejoService = {
 
     async actualizar(id, espejo) {
         const formData = new URLSearchParams();
-        formData.append('id', id);
-        formData.append('nombre', espejo.nombre);
-        formData.append('cantidad', espejo.cantidad || 0);
-        formData.append('precio', espejo.precio || 0);
-        formData.append('alto', espejo.alto || 0);
-        formData.append('ancho', espejo.ancho || 0);
-        formData.append('idProveedor', espejo.idProveedor || 1);
-        formData.append('precioProveedor', espejo.precioProveedor || 0);
+        formData.append('id', String(id));
+        formData.append('nombre', String(espejo.nombre));
+        formData.append('cantidad', String(espejo.cantidad));
+        formData.append('precio', String(espejo.precio));
+        formData.append('alto', String(espejo.alto));
+        formData.append('ancho', String(espejo.ancho));
+        formData.append('idProveedor', String(espejo.idProveedor));
+        formData.append('precioProveedor', String(espejo.precioProveedor));
+
+        console.log('Datos que se envían:', formData.toString());
 
         const response = await fetch(`${API_BASE}/actualizarespejo`, {
-            method: 'POST', // Cambiado a POST para coincidir con el controlador
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -54,10 +56,10 @@ export const EspejoService = {
 
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(errorText || 'Error al actualizar');
+            throw new Error(`Error HTTP ${response.status}: ${errorText}`);
         }
 
-        return await response.text(); // Retorna "Actualizado"
+        return await response.text();
     },
 
 

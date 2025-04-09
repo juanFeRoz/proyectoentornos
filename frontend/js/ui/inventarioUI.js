@@ -90,38 +90,33 @@ export class InventarioUI {
             let response;
 
             if (this.espejoEditando) {
-                // Preparación de datos exactamente como el modelo los espera
-                const datosActualizacion = {
-                    id: this.espejoEditando.id,
-                    nombre: this.elementos.inputs.nombre.value.trim(),
-                    cantidad: parseInt(this.elementos.inputs.cantidad.value) || 0,
-                    precio: precio, // Asegurar que es entero
-                    alto: parseInt(this.elementos.inputs.alto.value) || 0,
-                    ancho: parseInt(this.elementos.inputs.ancho.value) || 0,
-                    precioProveedor: parseInt(this.elementos.inputs.precioProveedor.value) || 0,
-                    proveedor: {
-                        id: parseInt(this.elementos.inputs.idProveedor.value) || 1
-                    }
-                };
+                // ✅ Enviar como x-www-form-urlencoded
+                const formData = new URLSearchParams();
+                formData.append('id', this.espejoEditando.id);
+                formData.append('nombre', this.elementos.inputs.nombre.value.trim());
+                formData.append('cantidad', this.elementos.inputs.cantidad.value || 0);
+                formData.append('precio', precio.toString());
+                formData.append('alto', this.elementos.inputs.alto.value || 0);
+                formData.append('ancho', this.elementos.inputs.ancho.value || 0);
+                formData.append('precioProveedor', this.elementos.inputs.precioProveedor.value || 0);
+                formData.append('idProveedor', this.elementos.inputs.idProveedor.value || 1);
 
-                console.log("Datos para actualización:", datosActualizacion);
+                console.log("Datos para actualización:", Object.fromEntries(formData.entries()));
 
                 response = await fetch('http://localhost:8080/tiendaespejos/actualizarespejo', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: JSON.stringify(datosActualizacion)
+                    body: formData
                 });
 
                 if (!response.ok) {
-                    const errorData = await response.json().catch(() => null);
-                    console.error("Error del backend:", errorData);
-                    throw new Error(errorData?.message || `Error HTTP ${response.status}`);
+                    const errorText = await response.text();
+                    console.error("Error del backend:", errorText);
+                    throw new Error(errorText || `Error HTTP ${response.status}`);
                 }
             } else {
-                // Lógica para creación (ajustada al modelo)
                 const formData = new URLSearchParams();
                 formData.append('nombre', this.elementos.inputs.nombre.value.trim());
                 formData.append('cantidad', this.elementos.inputs.cantidad.value || 0);
@@ -153,6 +148,7 @@ export class InventarioUI {
             alert(`Error: ${error.message}\n\nVer detalles en consola (F12)`);
         }
     }
+
 
     async cargarDatos() {
         try {
@@ -216,7 +212,7 @@ export class InventarioUI {
             cantidad: parseInt(fila.cells[3].textContent) || 0,
             alto: parseInt(fila.cells[4].textContent.replace(' cm', '')) || 0,
             ancho: parseInt(fila.cells[5].textContent.replace(' cm', '')) || 0,
-            proveedor: { id: parseInt(this.elementos.inputs.idProveedor.value) || 1 },
+            idProveedor: parseInt(this.elementos.inputs.idProveedor.value) || 1, // CAMBIO AQUÍ
             precioProveedor: parseFloat(fila.cells[7].textContent.replace('$', '').replace(',', '')) || 0
         };
 

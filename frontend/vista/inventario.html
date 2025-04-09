@@ -1,43 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Inventario</title>
-    <link rel="stylesheet" href="../css/inventario.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Inventario</title>
+  <link rel="stylesheet" href="../css/inventario.css">
+  <link href="https://fonts.googleapis.com/css2?family=Winky+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Lista de inventario</h1>
-    <div class="iconos">
-        <img src="../img/icono1.png" alt="icono 1">
-        <img src="../img/icono2.png" alt="icono 2">
-        <img src="../img/icono3.png" alt="icono 3">
-        <img src="../img/icono5.png" alt="icono 5">
-        <img src="../img/icono6.png" alt="icono 6">
-        <img src="../img/icono7.png" alt="icono 7">
-    </div>  
+<h1>LISTA DE INVENTARIOS</h1>
+<div class="box">
+  <div class="iconos">
+    <img src="../img/icono1.png" alt="icono 1">
+    <img src="../img/icono2.png" alt="icono 2">
+    <img src="../img/icono3.png" alt="icono 3">
+    <img src="../img/icono5.png" alt="icono 5">
+    <img src="../img/icono6.png" alt="icono 6">
+    <img src="../img/icono7.png" alt="icono 7">
+  </div>
+  <div class="table">
     <table>
-        <thead>
-            <tr>      
-                <th>ID producto</th>
-                <th>Nombre Producto</th>
-                <th>Precio Producto</th>
-                <th>Cantidad</th>
-                <th>Alto</th>
-                <th>Ancho</th>
-                <th>Provedor</th>
-                <th>Precio Proveedor</th>
-            </tr>
-        </thead>
-        <tbody id="inventory-body">
-        </tbody>
+      <thead>
+      <tr>
+        <th>ID producto</th>
+        <th>Nombre Producto</th>
+        <th>Precio Producto</th>
+        <th>Cantidad</th>
+        <th>Alto</th>
+        <th>Ancho</th>
+        <th>Provedor</th>
+        <th>Precio Proveedor</th>
+      </tr>
+      </thead>
+      <tbody id="inventory-body"></tbody>
     </table>
-    <div class="acciones">
-        <button id="btnAgregar">Agregar</button>
-        <button id="btnEliminar">Eliminar</button>
-        <button id="btnModificar">Modificar</button>
-      </div>      
-    <script src="../js/inventario.js"></script>
+  </div>
+</div>
+
+
+<div class="acciones">
+  <button id="btnAgregar" class="btn-primario">➕ Agregar</button>
+  <button id="btnRefrescar" class="btn-secundario">🔄 Refrescar</button>
+</div>
+
+<div id="formulario-modal" style="display: none;">
+  <div class="modal-contenido">
+    <h3 id="modal-titulo">Nuevo Producto</h3>
+    <form id="form-espejo">
+      <input type="text" id="input-nombre" name="nombre" placeholder="Nombre Producto" required>
+      <input type="number" id="input-cantidad" name="cantidad" placeholder="Cantidad" min="0" required>
+      <input type="number" id="input-precio" name="precio" placeholder="Precio" min="0" step="0.01" required>
+      <input type="number" id="input-alto" name="alto" placeholder="Alto (cm)" min="0">
+      <input type="number" id="input-ancho" name="ancho" placeholder="Ancho (cm)" min="0">
+      <input type="number" id="input-idProveedor" name="idProveedor" placeholder="ID Proveedor" required>
+      <input type="number" id="input-precioProveedor" name="precioProveedor" placeholder="Precio Proveedor" min="0" step="0.01" required>
+
+      <div class="modal-acciones">
+        <button type="submit" id="btnGuardar" class="btn-guardar">💾 Guardar</button>
+        <button type="button" id="btnCancelar" class="btn-cancelar">❌ Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Solo un script de importación -->
+<script type="module" src="../js/ui/inventarioUI.js"></script>
 </body>
 </html>
-
