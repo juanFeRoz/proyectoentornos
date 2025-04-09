@@ -1,4 +1,4 @@
-#Proyecto de entornos
+# Proyecto de entornos
 ## Sistema de inventario para una tienda de espejos
 
 Se creo una pagina web en la que se muestra el inventario de una tienda de espejos, desde la cual el dueño puede agregar, eliminar, actualizar y ver todos los espejos disponibles en el inventario de la tienda.
